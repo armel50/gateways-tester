@@ -1,5 +1,5 @@
-export var origin = document.location.origin
-export var DPO_services = {
+export const origin = document.location.origin
+export const DPO_services = {
     "acoomodatoin": "3165",
     "laptop_purchase": "3790",
     "ecommerce": "3854", 
@@ -15,3 +15,18 @@ export var DPO_services = {
 
 
 }
+
+export const DPO_reqest_type = {
+    "createToken": "createToken",
+    "verifyToken": "verifyToken",
+    "updateToken": "updateToken",
+    "refundToken": "refundToken",
+    "cancelToken": "cancelToken",
+    "emailToToken": "emailToToken",
+    "chargeTokenAuth": "chargeTokenAuth",
+    "chargeTokenBankTransfer": "chargeTokenBankTransfer",
+    "ChargeTokenMobile": "ChargeTokenMobile",
+    "chargeTokenCreditCard": "chargeTokenCreditCard"
+
+
+} 

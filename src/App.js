@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { origin , DPO_services} from "./constants/constants";
+import { origin , DPO_services, DPO_reqest_type} from "./constants/constants";
 import uuid from "react-uuid";
 function App() {
 
@@ -40,7 +40,7 @@ function App() {
     const xml = `<?xml version="1.0" encoding="utf-8"?>
                   <API3G>
                     <CompanyToken>${REACT_APP_DPO_TOKEN}</CompanyToken>
-                    <Request>createToken</Request>
+                    <Request>${DPO_reqest_type.createToken}</Request>
                     <Transaction>
                       <PaymentAmount>1.00</PaymentAmount>
                       <PaymentCurrency>USD</PaymentCurrency>
