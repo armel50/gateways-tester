@@ -1,10 +1,11 @@
 
 import { useState, useEffect } from "react";
-import { origin , DPO_services, DPO_reqest_type} from "./constants/constants";
+import { origin , DPO_services, DPO_request_type} from "./constants/constants";
+
 import uuid from "react-uuid";
 function App() {
 
-  const {REACT_APP_DPO_API,REACT_APP_DPO_TOKEN, REACT_APP_DPO_COMP_REF} = process.env
+  const {REACT_APP_DPO_API,REACT_APP_DPO_TOKEN, REACT_APP_DPO_COMP_REF, REACT_APP_STRIPE_PUBLIC_KEY} = process.env
   const [payment_request, setPayment] = useState({
     "email": "",
     "first_name": "", 
@@ -30,17 +31,23 @@ function App() {
     "mobile_money": ""
 
   })
+  const [stripePromise, setStripePromise] = useState(null)
+  const [clientSecret, setClientSecret] = useState("")
 
-  const DPO_pay= async ()=>{
+  const DPO_request = async (request)=>{
     const headers = {
                       "Content-Type": "application/xml", 
                       "Accept":"application/xml",
                       "Access-Control-Allow-Origin": "*"
                     }
-    const xml = `<?xml version="1.0" encoding="utf-8"?>
+
+    var xml = ""
+    switch (request) {
+      case "createToken":
+        xml = `<?xml version="1.0" encoding="utf-8"?>
                   <API3G>
                     <CompanyToken>${REACT_APP_DPO_TOKEN}</CompanyToken>
-                    <Request>${DPO_reqest_type.createToken}</Request>
+                    <Request>${request}</Request>
                     <Transaction>
                       <PaymentAmount>1.00</PaymentAmount>
                       <PaymentCurrency>USD</PaymentCurrency>
@@ -58,6 +65,12 @@ function App() {
                       </Service>
                     </Services>
                   </API3G>`
+        break;
+    
+      default:
+        break;
+    }
+    
     
    fetch(REACT_APP_DPO_API, {
       method: 'POST', 
@@ -73,7 +86,7 @@ function App() {
 
   }
   useEffect(()=> {
-    DPO_pay()
+    DPO_request(DPO_request_type.createToken)
   })
   
   

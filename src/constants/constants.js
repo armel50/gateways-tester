@@ -16,7 +16,7 @@ export const DPO_services = {
 
 }
 
-export const DPO_reqest_type = {
+export const DPO_request_type = {
     "createToken": "createToken",
     "verifyToken": "verifyToken",
     "updateToken": "updateToken",
